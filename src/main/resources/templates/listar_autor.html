@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+<header th:replace="layout/layout :: header" ></header>
+<div class="container col-9 contenedor">
+	<h1 class="secondary py-5" th:text="${titulo}"></h1>
+	
+	<button  class="btn btn-dark fa-solid fa-plus btn mb-5 btn p-3" sec:authorize="hasRole('ROLE_ADMIN')" ><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}">Crear</a></button>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>nombre</th>
+				<th>alta</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="autor: ${autores}">
+			<div th:if="${autor.alta == true}">
+			<td th:text="${autor.id}"></td>
+			<td th:text="${autor.nombre}"></td>			
+			<td th:text="${autor.alta}"></td>			
+			<td><a class="fa-solid fa-pen" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form/}+${autor.id}"></a></td>
+			<td><a class="fa-solid fa-trash" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar/}+${autor.id}" onclick="return confirm('Esta seguro que desea eliminar?')"></a></td>
+			
+			</div>
+			
+			</tr>
+		</tbody>
+	</table>
+	
+
+
+</div>
+
+	<footer th:replace="layout/layout :: footer"> </footer>
+	
+
+</body>
+</html>

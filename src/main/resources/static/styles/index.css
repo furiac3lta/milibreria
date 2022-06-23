@@ -1,0 +1,5 @@
+@charset "UTF-8";
+.imagen{
+	background-image: url('/images/libreria.jpg');
+	height: 100vh;
+}

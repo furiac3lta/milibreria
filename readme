@@ -1,0 +1,2 @@
+spring.jpa.hibernate.ddl-auto=create-drop --> cada vez que inicia la aplicacion borra y crea de nuevo la bbdd
+spring.jpa.hibernate.ddl-auto=none --> mantiene la bbdd sin cambios 

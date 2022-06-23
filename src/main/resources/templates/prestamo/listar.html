@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+<header th:replace="layout/layout :: header" ></header>
+<div class="container">
+	<h1 class="secondary py-5" th:text="${titulo}"></h1>
+	
+<div class="container col-12 contenedor">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Fecha Prestamo</th>
+				<th>Fecha Devolucion</th>
+				<th>Nombre del Libro</th>
+				<th>Usuario</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+				<!-- <th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+				<th sec:authorize="hasRole('ROLE_ADMIN')">crear</th> -->
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- 		en th:text van los nombres de los atributos -->
+		
+			<tr th:each="prestamo: ${prestamos}">
+			<div th:if="${prestamo.alta == true}">
+			<td th:text="${prestamo.id}"></td>
+			<td th:text="${prestamo.fechaDevolucion}"></td>
+			<td th:text="${prestamo.fechaPrestamo}"></td>
+			<td th:text="${prestamo.libro.getTitulo}"></td>
+			<td th:text="${prestamo.user.getUsername}"></td>
+			<td><a class="fa-solid fa-trash" sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{eliminar/}+${prestamo.id}"></a></td>
+			<!-- <td><a class="fa-solid fa-pen" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamo/formulario/}+${prestamo.id}" ></a></td>
+			<td><a class="fa-solid fa-trash" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamo/formulario/eliminar/{id}}"  onclick="return confirm('Esta seguro que desea eliminar?')"></a></td>
+			<td><a class="fa-solid fa-plus" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/prestamo/formulario}"></a> -->
+			
+			</div>
+		</tr>
+		</tbody>
+	</table>
+</div>
+	
+
+</div>
+
+	<footer th:replace="layout/layout :: footer"> </footer>
+	
+
+</body>
+</html>
